@@ -51,7 +51,7 @@ A full-stack HR management system built with **React + Vite** (frontend) and **F
 - Custom confirmation modals
 - Inline form validation
 
-## 📁 Project Structure
+### 📁 Project Structure
 hrms/
 ├── backend/
 │   ├── main.py                   
