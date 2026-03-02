@@ -1,19 +1,20 @@
 HRMS - Human Resource Management System
 A full-stack HR management system built with React + Vite on the frontend and FastAPI + PostgreSQL on the backend. Manage employees, track attendance, and view real-time dashboard analytics.
-Live Demo
+
+🚀 Live Demo
 Frontend: https://hrms-self-chi.vercel.app/dashboard
 
 Backend API: https://hrms-8ndw.onrender.com
 
 API Docs: https://hrms-8ndw.onrender.com/docs
 
-Tech Stack
+🛠️ Tech Stack
 Layer	Technology
 Frontend	React 18, Vite, Tailwind CSS, React Router, Axios, Lucide Icons
 Backend	Python, FastAPI, SQLAlchemy, Pydantic
 Database	PostgreSQL
 Deployment	Vercel (frontend) + Render (backend)
-Features
+✨ Features
 Employee Management – Add, edit, delete, and search employees
 
 Attendance Tracking – Mark present/absent/leave with edit & delete
@@ -34,7 +35,7 @@ Responsive Design – Works on mobile, tablet, and desktop
 
 Professional UI – Modern gradient design with smooth animations
 
-Project Structure
+📁 Project Structure
 text
 hrms/
 ├── backend/
@@ -64,7 +65,7 @@ hrms/
         ├── components/
         ├── services/api.js
         └── hooks/useGreeting.js
-Running Locally
+🏃 Running Locally
 Prerequisites
 Node.js 16+ and npm
 
@@ -109,7 +110,7 @@ echo VITE_API_URL=http://localhost:8000 > .env
 npm run dev
 Frontend runs at: http://localhost:5173
 
-Deployment Guide
+🌍 Deployment Guide
 1. Push to GitHub
 bash
 git init
@@ -146,7 +147,7 @@ Add environment variable: VITE_API_URL (your Render backend URL)
 5. Update CORS
 Add your Vercel URL to backend's FRONTEND_URL environment variable
 
-API Endpoints
+📡 API Endpoints
 Method	Endpoint	Description
 GET	/api/employees/	List all employees
 POST	/api/employees/	Add new employee
@@ -165,7 +166,7 @@ Backend (.env)
 text
 DATABASE_URL=postgresql://user:password@host/dbname
 FRONTEND_URL=https://hrms-self-chi.vercel.app
-Important Notes
+⚠️ Important Notes
 No Authentication – Single-admin system, no login required
 
 Attendance Rules – One record per employee per day (editable)
@@ -174,14 +175,14 @@ Free Tier – Render may spin down after inactivity (first request may take 30s)
 
 Database – Tables created automatically on first startup
 
-Features in Action
+🎯 Features in Action
 Dashboard – Live clock, time-based greeting, employee stats, new joinings
 
 Employees – Search, add, edit, delete with validation
 
 Attendance – Mark status, view stats, filter by date/employee
 
-Contributing
+🤝 Contributing
 Feel free to fork, contribute, or suggest improvements!
 
 📄 License
@@ -192,3 +193,4 @@ Yugal Sharma
 GitHub: @yugalsharmaandtc
 
 Happy HR Management! 🎉
+
