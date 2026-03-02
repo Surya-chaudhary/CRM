@@ -2,7 +2,7 @@
 
 A full-stack HR management system built with **React + Vite** (frontend) and **FastAPI + PostgreSQL** (backend). Manage employees, track attendance, and view real-time dashboard analytics with a modern, responsive UI.
 
-## 🚀 Live Demo
+##  Live Demo
 
 - **Frontend:** [https://hrms-self-chi.vercel.app/dashboard](https://hrms-self-chi.vercel.app/dashboard)
 - **Backend API:** [https://hrms-8ndw.onrender.com](https://hrms-8ndw.onrender.com)
@@ -14,7 +14,7 @@ A full-stack HR management system built with **React + Vite** (frontend) and **F
 |-----------|-----------|------------|
 | *Coming soon* | *Coming soon* | *Coming soon* |
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |-------|------------|
@@ -23,35 +23,35 @@ A full-stack HR management system built with **React + Vite** (frontend) and **F
 | **Database** | PostgreSQL |
 | **Deployment** | Vercel (frontend) + Render (backend) |
 
-## ✨ Features
+##  Features
 
-### 👥 Employee Management
+###  Employee Management
 - Add, edit, delete employees
 - Search employees by name, ID, or department
 - Phone and email validation
 - Status tracking (Active/On Leave)
 
-### 📅 Attendance Tracking
+###  Attendance Tracking
 - Mark attendance (Present/Absent/Leave)
 - Edit or delete attendance records
 - Filter by date or employee
 - Real-time attendance statistics
 
-### 📊 Live Dashboard
+###  Live Dashboard
 - Total employees count
 - Today's attendance breakdown
 - Department-wise distribution
 - Recent activity feed
 - Time-based greeting with dynamic UI colors
 
-### 🎨 UI/UX Highlights
+###  UI/UX Highlights
 - Fully responsive design (mobile, tablet, desktop)
 - Smooth animations and transitions
 - Dynamic theme colors based on time of day
 - Custom confirmation modals
 - Inline form validation
   
-## 📁 Project Structure
+##  Project Structure
 
 ```
 hrms/
@@ -99,7 +99,7 @@ hrms/
 ```
 
             
-## 🏃 Running Locally
+##  Running Locally
 
 ### Prerequisites
 - Node.js 16+ and npm
@@ -147,7 +147,7 @@ npm run dev
 Frontend runs at: http://localhost:5173
 
 ### Deployment Guide
-## ** Step 1: Push to GitHub
+## ** Step 1: Push to GitHub **
 ```
 git init
 git add .
@@ -157,29 +157,30 @@ git branch -M main
 git push -u origin main
 ```
 ## **Step 2: Set Up PostgreSQL on Render**
-Go to render.com → Sign up/Log in
+1. **Go to** https://render.com → **Sign up / Log in**
 
-Click "New +" → "PostgreSQL"
+2. Click **"New +"** → Select **"PostgreSQL"**
 
-Configure the database:
+3. **Configure the database:**
 
-Name: hrms-db
+   - **Name:** `hrms-db`  
+   - **Database:** `hrms`  
+   - **User:** `hrms_user` *(auto-generated)*  
+   - **Region:** Choose the closest region to you  
+   - **Plan:** Free  
 
-Database: hrms
+4. Click **"Create Database"** (wait 1–2 minutes).
 
-User: hrms_user (auto-generated)
+5. After creation, go to the **Connections** section.
 
-Region: Choose closest to you
+6. Copy the **Internal Database URL**.
 
-Plan: Free
+7. It will look like this:
 
-Click "Create Database" (wait 1-2 minutes)
-
-Copy the Internal Database URL from the Connections section
-
-Format: postgresql://hrms_user:PASSWORD@dpg-xxxx.internal:5432/hrms
-
-## ⚙️ **Step 3: Deploy Backend on Render**
+   ```
+   postgresql://hrms_user:PASSWORD@dpg-xxxx.internal:5432/hrms
+   ```
+##  **Step 3: Deploy Backend on Render**
 Click "New +" → "Web Service"
 
 Connect GitHub and select your HRMS repository
@@ -214,143 +215,132 @@ Wait for deployment (5-10 minutes). Note your backend URL:
 
 text
 https://hrms-8ndw.onrender.com
-## 🌐 **Step 4: Deploy Frontend on Vercel**
-Go to vercel.com → Sign up with GitHub
+##  **Step 4: Deploy Frontend on Vercel**
+1. Click **"New +"** → Select **"Web Service"**
 
-Click "Add New Project" → Select your HRMS repository
+2. Connect your **GitHub account** and select your **HRMS repository**
 
-Configure the project:
+3. **Configure the service:**
 
-Root Directory: frontend
+   - **Name:** `hrms-api`
+   - **Root Directory:** `backend`
+   - **Environment:** `Python 3`
+   - **Region:** Same as your database
+   - **Branch:** `main`
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - **Plan:** Free
 
-Framework Preset: Vite
+4. **Add Environment Variables:**
 
-Build Command: npm run build
+   - **DATABASE_URL:** Paste the Internal Database URL from Step 2  
+   - **FRONTEND_URL:** `https://hrms-self-chi.vercel.app` *(Update after frontend deployment)*  
+   - **ENVIRONMENT:** `production`
 
-Output Directory: dist
+5. Click **"Create Web Service"**
 
-Add Environment Variable:
+6. Wait for deployment (5–10 minutes).
 
-Key	Value
-VITE_API_URL	https://hrms-8ndw.onrender.com (your Render backend URL)
-Click "Deploy"
+7. After deployment, note your backend URL. It will look like:
 
-Wait for deployment (2-3 minutes). Note your frontend URL:
+   ```
+   https://hrms-8ndw.onrender.com
+   ```
+##  **Step 5: Update CORS**
+##  **Step 5: Update CORS Configuration**
 
-text
-https://hrms-self-chi.vercel.app
-## 🔄 **Step 5: Update CORS**
-Go back to Render Dashboard → hrms-api service
+1. Go back to your **Render Dashboard**.
 
-Click "Environment" tab
+2. Open your **`hrms-api`** service.
 
-Update the FRONTEND_URL variable:
+3. Click on the **"Environment"** tab.
 
-Change it to your Vercel frontend URL
+4. Update the **`FRONTEND_URL`** environment variable.
 
-Example: https://hrms-self-chi.vercel.app
+5. Change its value to your deployed Vercel frontend URL.
 
-Click "Save Changes"
+   Example:
+   ```
+   https://hrms-self-chi.vercel.app
+   ```
 
-Render will auto-redeploy (~2 minutes)
+6. Click **"Save Changes"**.
 
-Configure:
+7. Render will automatically redeploy the service (takes ~2 minutes).
 
-Name: hrms-api
 
-Root Directory: backend
+##  API Endpoints
 
-Environment: Python 3
-
-Build Command: pip install -r requirements.txt
-
-Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
-
-Plan: Free
-
-Add Environment Variables:
-
-DATABASE_URL: (paste from Step 2)
-
-FRONTEND_URL: (leave blank for now)
-
-Click Deploy
-
-Step 4: Deploy Frontend on Vercel
-Go to vercel.com → Add New Project
-
-Import your GitHub repo
-
-Configure:
-
-Root Directory: frontend
-
-Framework Preset: Vite
-
-Build Command: npm run build
-
-Output Directory: dist
-
-Add Environment Variable:
-
-VITE_API_URL: Your Render backend URL
-
-Click Deploy
-
-Step 5: Update CORS
-Go to Render dashboard → hrms-api → Environment
-
-Update FRONTEND_URL with your Vercel URL
-
-Save → Auto-redeploy
-
-📡 API Endpoints
-Method	Endpoint	Description
-GET	/api/employees/	List all employees
-POST	/api/employees/	Add new employee
-PUT	/api/employees/{id}	Update employee
-DELETE	/api/employees/{id}	Delete employee
-GET	/api/employees/stats	Get dashboard statistics
-GET	/api/attendance/	List all attendance records
-POST	/api/attendance/	Mark attendance
-PUT	/api/attendance/{id}	Edit attendance record
-DELETE	/api/attendance/{id}	Delete attendance record
+| Method | Endpoint | Description |
+|--------|----------|------------|
+| **GET** | `/api/employees/` | List all employees |
+| **POST** | `/api/employees/` | Add new employee |
+| **PUT** | `/api/employees/{id}` | Update employee |
+| **DELETE** | `/api/employees/{id}` | Delete employee |
+| **GET** | `/api/employees/stats` | Get dashboard statistics |
+| **GET** | `/api/attendance/` | List all attendance records |
+| **POST** | `/api/attendance/` | Mark attendance |
+| **PUT** | `/api/attendance/{id}` | Edit attendance record |
+| **DELETE** | `/api/attendance/{id}` | Delete attendance record |
 
 Full interactive docs: https://hrms-8ndw.onrender.com/docs
 
-# Environment Variables
-Frontend (.env)
-text
+## Environment Variables
+
+### Frontend (.env)
+
+```env
 VITE_API_URL=https://hrms-8ndw.onrender.com
-Backend (.env)
-text
-DATABASE_URL=postgresql://user:password@host/dbname
+```
+
+### Backend (.env)
+
+```env
+DATABASE_URL=postgresql://user:password@host:5432/dbname
 FRONTEND_URL=https://hrms-self-chi.vercel.app
-# Important Notes
-No Authentication: Single-admin system, no login required
+```
+## Important Notes
 
-Attendance Rules: One record per employee per day (editable)
+- **No Authentication:** This is a single-admin system. No login functionality is implemented.
 
-Free Tier: Render may spin down after inactivity (first request ~30s)
+- **Attendance Rule:** Only one attendance record per employee per day is allowed (records can be edited).
 
-Database: Tables created automatically on first startup
+- **Free Tier Limitation:** Render’s free tier may spin down after inactivity. The first request may take around 30 seconds (cold start).
 
-# Contributing
-Feel free to fork, contribute, or suggest improvements!
+- **Database Setup:** Database tables are automatically created on the first application startup.
 
-Fork the repository
+## Contributing
 
-Create your feature branch (git checkout -b feature/AmazingFeature)
+Contributions are welcome! If you'd like to improve this project, please follow these steps:
 
-Commit changes (git commit -m 'Add AmazingFeature')
+1. **Fork** the repository
 
-Push to branch (git push origin feature/AmazingFeature)
+2. Create your feature branch:
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
 
-Open a Pull Request
+3. Commit your changes:
+   ```bash
+   git commit -m "Add AmazingFeature"
+   ```
 
-# License
-This project is open source and free to use.
+4. Push to the branch:
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
 
-👨‍💻 Author
-Pinki Chaudhary
-GitHub: 
+5. Open a **Pull Request**
+
+---
+
+## License
+
+This project is open-source and free to use.
+
+---
+
+## Author
+
+**Pinki Chaudhary**  
+GitHub: https://github.com/Surya-chaudhary
