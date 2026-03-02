@@ -142,7 +142,7 @@ npm run dev
 
 Frontend runs at: http://localhost:5173
 
-# Deployment Guide
+## Deployment Guide
 Step 1: Push to GitHub
 bash
 git init
