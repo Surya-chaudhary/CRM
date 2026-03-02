@@ -50,32 +50,32 @@ A full-stack HR management system built with **React + Vite** (frontend) and **F
 - Dynamic theme colors based on time of day
 - Custom confirmation modals
 - Inline form validation
-
-### 📁 Project Structure
+  
+### Project Structure
 hrms/
 ├── backend/
-│   ├── main.py                   
-│   ├── requirements.txt          
-│   ├── start.sh                   
-│   ├── .env.example              
+│   ├── main.py
+│   ├── requirements.txt
+│   ├── start.sh
+│   ├── .env.example
 │   └── app/
 │       ├── api/
 │       │   └── routes/
 │       │       ├── employees.py
 │       │       └── attendance.py
 │       ├── core/
-│       │   └── config.py          
+│       │   └── config.py
 │       ├── db/
-│       │   └── database.py       
-│       ├── models/                
-│       ├── schemas/                
-│       └── services/               
+│       │   └── database.py
+│       ├── models/
+│       ├── schemas/
+│       └── services/
 │
 └── frontend/
     ├── index.html
     ├── vite.config.js
     ├── tailwind.config.js
-    ├── vercel.json                 
+    ├── vercel.json
     ├── .env.example
     ├── public/
     │   └── logo.jpg
@@ -88,12 +88,12 @@ hrms/
         │   └── Attendance.jsx
         ├── components/
         │   └── Sidebar.jsx
-        └── services/               
-            ├── index.js              
-            ├── api.js                 
-            ├── employeeService.js     
-            ├── attendanceService.js   
-            └── dashboardService.js    
+        └── services/
+            ├── index.js
+            ├── api.js
+            ├── employeeService.js
+            ├── attendanceService.js
+            └── dashboardService.js  
 
             
 ## 🏃 Running Locally
