@@ -1,88 +1,77 @@
 HRMS - Human Resource Management System
-A full-stack HR management system built with React + Vite on the frontend and FastAPI + PostgreSQL on the backend. Manage employees, track attendance, and view real-time dashboard analytics.
+A full-stack HR management system built with React + Vite (frontend) and FastAPI + PostgreSQL (backend). Manage employees, track attendance, and view real-time dashboard analytics with a modern, responsive UI.
 
-🚀 Live Demo
+Live Demo
 Frontend: https://hrms-self-chi.vercel.app/dashboard
-
 Backend API: https://hrms-8ndw.onrender.com
-
 API Docs: https://hrms-8ndw.onrender.com/docs
-
-🛠️ Tech Stack
+Tech Stack
 Layer	Technology
 Frontend	React 18, Vite, Tailwind CSS, React Router, Axios, Lucide Icons
 Backend	Python, FastAPI, SQLAlchemy, Pydantic
 Database	PostgreSQL
 Deployment	Vercel (frontend) + Render (backend)
-✨ Features
-Employee Management – Add, edit, delete, and search employees
-
-Attendance Tracking – Mark present/absent/leave with edit & delete
-
-Live Dashboard – Real-time employee stats, attendance rate, department breakdown
-
-Time-Based Greeting – Dynamic greeting changes with color-coded UI
-
-Dynamic Theme Colors – Sidebar and buttons change color based on time
-
-New Joinings Section – View recently added employees
-
-Advanced Filtering – Filter attendance by employee or date
-
-Data Validation – Phone and email validation on both ends
-
-Responsive Design – Works on mobile, tablet, and desktop
-
-Professional UI – Modern gradient design with smooth animations
-
-📁 Project Structure
-text
+Features
+Employee Management - Add, edit, delete, search employees by name/ID/department
+Attendance Tracking - Mark present, absent, late, half-day with edit & delete support
+Live Dashboard - Real-time employee stats, attendance rate, department breakdown
+Time-Based Greeting - Dynamic greeting changes (Good Morning/Afternoon/Evening) with color-coded UI
+Dynamic Theme Colors - Sidebar and buttons change color based on time of day
+New Joinings Section - View recently added employees on dashboard
+Advanced Filtering - Filter attendance by employee or date
+Data Validation - Phone and email validation on both frontend and backend
+Responsive Design - Works perfectly on mobile, tablet, and desktop
+Professional UI - Modern gradient design with smooth animations
+Project Structure
 hrms/
 ├── backend/
-│   ├── main.py
+│   ├── main.py                   # FastAPI entry point
 │   ├── requirements.txt
-│   ├── start.sh
+│   ├── start.sh                  # Render start command
 │   ├── .env.example
 │   └── app/
-│       ├── api/routes/
-│       │   ├── employees.py
-│       │   └── attendance.py
-│       ├── core/config.py
-│       ├── db/database.py
-│       ├── models/
-│       ├── schemas/
-│       └── services/
+│       ├── api/
+│       │   └── routes/
+│       │       ├── employees.py
+│       │       └── attendance.py
+│       ├── core/
+│       │   └── config.py         # Settings & CORS config
+│       ├── db/
+│       │   └── database.py       # SQLAlchemy setup
+│       ├── models/               # SQLAlchemy ORM models
+│       ├── schemas/              # Pydantic request/response schemas
+│       └── services/             # Business logic
 │
 └── frontend/
     ├── index.html
     ├── vite.config.js
     ├── tailwind.config.js
-    ├── vercel.json
+    ├── vercel.json               # SPA routing fix for Vercel
     ├── .env.example
     ├── public/
+    │   └── admin image.jpg       # HRMS logo
     └── src/
-        ├── pages/
-        ├── components/
-        ├── services/api.js
-        └── hooks/useGreeting.js
-🏃 Running Locally
+        ├── App.jsx
+        ├── main.jsx
+        ├── pages/                # Dashboard, Employees, Attendance
+        ├── components/           # Layout, forms, UI components
+        ├── services/api.js       # Axios API calls
+        └── hooks/useGreeting.js  # Time-based greeting hook
+Running Locally
 Prerequisites
 Node.js 16+ and npm
-
 Python 3.8+
-
 PostgreSQL installed locally
-
 Backend Setup
-bash
 cd hrms/backend
 
 # Create virtual environment
 python -m venv venv
 
-# Activate (Windows)
+# Activate virtual environment
+# Windows:
 venv\Scripts\activate
-# Activate (Mac/Linux)
+# Mac/Linux:
 source venv/bin/activate
 
 # Install dependencies
@@ -91,13 +80,12 @@ pip install -r requirements.txt
 # Create .env file
 echo DATABASE_URL=postgresql://postgres:postgres@localhost:5432/hrms > .env
 
-# Run server
+# Run the server
 uvicorn main:app --reload
 Backend runs at: http://localhost:8000
-Docs: http://localhost:8000/docs
+API documentation: http://localhost:8000/docs
 
 Frontend Setup
-bash
 cd hrms/frontend
 
 # Install dependencies
@@ -106,91 +94,114 @@ npm install
 # Create .env file
 echo VITE_API_URL=http://localhost:8000 > .env
 
-# Run dev server
+# Run development server
 npm run dev
 Frontend runs at: http://localhost:5173
 
-🌍 Deployment Guide
-1. Push to GitHub
-bash
+Deployment Guide
+Step 1: Push to GitHub
 git init
 git add .
-git commit -m "feat: initial HRMS release"
+git commit -m "Initial commit"
 git remote add origin https://github.com/yugalsharmaandtc/HRMS.git
 git branch -M main
 git push -u origin main
-2. Set Up PostgreSQL on Render
-Create new PostgreSQL database on Render
+Step 2: Set up PostgreSQL on Render
+Go to render.com → Sign up/Log in
+Click New + → PostgreSQL
+Configure:
+Name: hrms-db
+Database: hrms
+User: hrms_user
+Region: Choose closest to you
+Plan: Free
+Click Create Database
+Once ready, copy the Internal Database URL from Connection section
+Format: postgresql://hrms_user:PASSWORD@dpg-xxxx.internal/hrms
+Step 3: Deploy Backend on Render
+Click New + → Web Service
+Connect GitHub and select your HRMS repo
+Configure:
+Name: hrms-api
+Root Directory: backend
+Environment: Python 3
+Build Command: pip install -r requirements.txt
+Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
+Plan: Free
+Add Environment Variables:
+DATABASE_URL: Paste the Internal Database URL from Step 2
+FRONTEND_URL: Leave blank (update after Vercel deploy)
+Click Create Web Service
+Once deployed, note your backend URL (e.g., https://hrms-8ndw.onrender.com)
+Step 4: Deploy Frontend on Vercel
+Go to vercel.com → Sign up with GitHub
+Click Add New Project → Select HRMS repo
+Configure:
+Root Directory: frontend
+Framework Preset: Vite
+Build Command: npm run build
+Output Directory: dist
+Add Environment Variable:
+VITE_API_URL: Your Render backend URL (e.g., https://hrms-8ndw.onrender.com)
+Click Deploy
+Once done, note your frontend URL (e.g., https://hrms-self-chi.vercel.app)
+Step 5: Fix CORS (Update Backend with Frontend URL)
+Go to Render → hrms-api service
+Go to Environment tab
+Update FRONTEND_URL with your Vercel URL (e.g., https://hrms-self-chi.vercel.app)
+Render will auto-redeploy (~2 minutes)
+Your app is now live and ready to use!
 
-Copy the Internal Database URL
-
-3. Deploy Backend on Render
-Create new Web Service
-
-Set root directory: backend
-
-Build command: pip install -r requirements.txt
-
-Start command: uvicorn main:app --host 0.0.0.0 --port $PORT
-
-Add environment variable: DATABASE_URL (from step 2)
-
-4. Deploy Frontend on Vercel
-Import GitHub repository
-
-Set root directory: frontend
-
-Framework preset: Vite
-
-Add environment variable: VITE_API_URL (your Render backend URL)
-
-5. Update CORS
-Add your Vercel URL to backend's FRONTEND_URL environment variable
-
-📡 API Endpoints
+API Endpoints
 Method	Endpoint	Description
 GET	/api/employees/	List all employees
 POST	/api/employees/	Add new employee
 PUT	/api/employees/{id}	Update employee
 DELETE	/api/employees/{id}	Delete employee
 GET	/api/employees/stats	Get dashboard stats
-GET	/api/attendance/	List attendance
+GET	/api/attendance/	List attendance records
 POST	/api/attendance/	Mark attendance
-PUT	/api/attendance/{id}	Edit attendance
-DELETE	/api/attendance/{id}	Delete attendance
-🔧 Environment Variables
+PUT	/api/attendance/{id}	Edit attendance record
+DELETE	/api/attendance/{id}	Delete attendance record
+Full interactive documentation: https://hrms-8ndw.onrender.com/docs
+
+Environment Variables
 Frontend (.env)
-text
 VITE_API_URL=https://hrms-8ndw.onrender.com
 Backend (.env)
-text
 DATABASE_URL=postgresql://user:password@host/dbname
 FRONTEND_URL=https://hrms-self-chi.vercel.app
-⚠️ Important Notes
-No Authentication – Single-admin system, no login required
-
-Attendance Rules – One record per employee per day (editable)
-
-Free Tier – Render may spin down after inactivity (first request may take 30s)
-
-Database – Tables created automatically on first startup
-
-🎯 Features in Action
-Dashboard – Live clock, time-based greeting, employee stats, new joinings
-
-Employees – Search, add, edit, delete with validation
-
-Attendance – Mark status, view stats, filter by date/employee
-
-🤝 Contributing
+Important Notes
+No Authentication: This is a single-admin system. No login required.
+Attendance Rules: One attendance record per employee per day (editing allowed)
+Free Tier: Render may spin down after inactivity. First request may take 30 seconds.
+Database: Tables are created automatically on first backend startup.
+Features in Action
+Dashboard
+Live clock with time-based greeting
+Employee stats card (total, present, absent, attendance %)
+New joinings section
+Quick action buttons (color-coded by time of day)
+Department breakdown
+Employees Page
+Search employees by name, ID, email, or department
+Add, edit, delete employees
+View contact info and department
+Dynamic add button color
+Attendance Page
+Mark attendance with status (present, absent, late, half-day)
+View attendance statistics
+Filter by employee or date
+Edit/delete attendance records
+Dynamic mark attendance button color
+Contributing
 Feel free to fork, contribute, or suggest improvements!
 
-📄 License
-Open source and free to use.
+License
+This project is open source and free to use.
 
-👨‍💻 Author
+Author
 Yugal Sharma
-GitHub: @yugalsharmaandtc
+GitHub: https://github.com/yugalsharmaandtc
 
-Happy HR Management! 🎉
-
+Happy HR Management!
