@@ -181,40 +181,39 @@ git push -u origin main
    postgresql://hrms_user:PASSWORD@dpg-xxxx.internal:5432/hrms
    ```
 ##  **Step 3: Deploy Backend on Render**
-Click "New +" → "Web Service"
 
-Connect GitHub and select your HRMS repository
+1. Click **"New +"** → Select **"Web Service"**
 
-Configure the service:
+2. Connect your **GitHub account** and select your **HRMS repository**.
 
-Name: hrms-api
+3. Configure the service:
 
-Root Directory: backend
+   - **Name:** `hrms-api`
+   - **Root Directory:** `backend`
+   - **Environment:** `Python 3`
+   - **Region:** Same as your database
+   - **Branch:** `main`
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - **Plan:** Free
 
-Environment: Python 3
+4. Add the following **Environment Variables**:
 
-Region: Same as your database
+   | Key | Value |
+   |------|--------|
+   | `DATABASE_URL` | Paste the Internal Database URL from Step 2 |
+   | `FRONTEND_URL` | `https://hrms-self-chi.vercel.app` *(Update after frontend deployment)* |
+   | `ENVIRONMENT` | `production` |
 
-Branch: main
+5. Click **"Create Web Service"**.
 
-Build Command: pip install -r requirements.txt
+6. Wait for deployment (5–10 minutes).
 
-Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
+7. After deployment, your backend URL will look like:
 
-Plan: Free
-
-Add Environment Variables:
-
-Key	Value
-DATABASE_URL	Paste the Internal Database URL from Step 2
-FRONTEND_URL	https://hrms-self-chi.vercel.app (update after frontend deploy)
-ENVIRONMENT	production
-Click "Create Web Service"
-
-Wait for deployment (5-10 minutes). Note your backend URL:
-
-text
-https://hrms-8ndw.onrender.com
+   ```
+   https://hrms-8ndw.onrender.com
+   ```
 ##  **Step 4: Deploy Frontend on Vercel**
 1. Click **"New +"** → Select **"Web Service"**
 
