@@ -128,10 +128,11 @@ echo DATABASE_URL=postgresql://postgres:postgres@localhost:5432/hrms > .env
 
 # Run the server
 uvicorn main:app --reload
-
+```
 Backend runs at: http://localhost:8000
 API documentation: http://localhost:8000/docs
-
+### Backend Setup
+```
 cd hrms/frontend
 
 # Install dependencies
@@ -142,38 +143,116 @@ echo VITE_API_URL=http://localhost:8000 > .env
 
 # Run development server
 npm run dev
-
+```
 Frontend runs at: http://localhost:5173
 
-## Deployment Guide
-Step 1: Push to GitHub
-bash
+### Deployment Guide
+##Step 1: Push to GitHub
+```
 git init
 git add .
-git commit -m "Initial commit"
+git commit -m "feat: initial HRMS release"
 git remote add origin https://github.com/yugalsharmaandtc/HRMS.git
 git branch -M main
 git push -u origin main
-
+```
 Step 2: Set up PostgreSQL on Render
-Go to render.com → New+ → PostgreSQL
+Go to render.com → Sign up/Log in
 
-Configure:
+Click "New +" → "PostgreSQL"
+
+Configure the database:
 
 Name: hrms-db
 
 Database: hrms
 
-User: hrms_user
+User: hrms_user (auto-generated)
+
+Region: Choose closest to you
 
 Plan: Free
 
-Click Create Database
+Click "Create Database" (wait 1-2 minutes)
 
-Copy the Internal Database URL
+Copy the Internal Database URL from the Connections section
+
+Format: postgresql://hrms_user:PASSWORD@dpg-xxxx.internal:5432/hrms
 
 Step 3: Deploy Backend on Render
-New+ → Web Service → Connect GitHub repo
+Click "New +" → "Web Service"
+
+Connect GitHub and select your HRMS repository
+
+Configure the service:
+
+Name: hrms-api
+
+Root Directory: backend
+
+Environment: Python 3
+
+Region: Same as your database
+
+Branch: main
+
+Build Command: pip install -r requirements.txt
+
+Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
+
+Plan: Free
+
+Add Environment Variables:
+
+Key	Value
+DATABASE_URL	Paste the Internal Database URL from Step 2
+FRONTEND_URL	https://hrms-self-chi.vercel.app (update after frontend deploy)
+ENVIRONMENT	production
+Click "Create Web Service"
+
+Wait for deployment (5-10 minutes). Note your backend URL:
+
+text
+https://hrms-8ndw.onrender.com
+Step 4: Deploy Frontend on Vercel
+Go to vercel.com → Sign up with GitHub
+
+Click "Add New Project" → Select your HRMS repository
+
+Configure the project:
+
+Root Directory: frontend
+
+Framework Preset: Vite
+
+Build Command: npm run build
+
+Output Directory: dist
+
+Add Environment Variable:
+
+Key	Value
+VITE_API_URL	https://hrms-8ndw.onrender.com (your Render backend URL)
+Click "Deploy"
+
+Wait for deployment (2-3 minutes). Note your frontend URL:
+
+text
+https://hrms-self-chi.vercel.app
+Step 5: Update CORS (Final Step)
+Go back to Render Dashboard → hrms-api service
+
+Click "Environment" tab
+
+Update the FRONTEND_URL variable:
+
+Change it to your Vercel frontend URL
+
+Example: https://hrms-self-chi.vercel.app
+
+Click "Save Changes"
+
+Render will auto-redeploy (~2 minutes)
 
 Configure:
 
