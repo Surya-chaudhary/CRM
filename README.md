@@ -147,7 +147,7 @@ npm run dev
 Frontend runs at: http://localhost:5173
 
 ### Deployment Guide
-##Step 1: Push to GitHub
+## ** Step 1: Push to GitHub
 ```
 git init
 git add .
@@ -156,7 +156,7 @@ git remote add origin https://github.com/yugalsharmaandtc/HRMS.git
 git branch -M main
 git push -u origin main
 ```
-Step 2: Set up PostgreSQL on Render
+## **Step 2: Set Up PostgreSQL on Render**
 Go to render.com → Sign up/Log in
 
 Click "New +" → "PostgreSQL"
@@ -179,7 +179,7 @@ Copy the Internal Database URL from the Connections section
 
 Format: postgresql://hrms_user:PASSWORD@dpg-xxxx.internal:5432/hrms
 
-Step 3: Deploy Backend on Render
+## ⚙️ **Step 3: Deploy Backend on Render**
 Click "New +" → "Web Service"
 
 Connect GitHub and select your HRMS repository
@@ -214,7 +214,7 @@ Wait for deployment (5-10 minutes). Note your backend URL:
 
 text
 https://hrms-8ndw.onrender.com
-Step 4: Deploy Frontend on Vercel
+## 🌐 **Step 4: Deploy Frontend on Vercel**
 Go to vercel.com → Sign up with GitHub
 
 Click "Add New Project" → Select your HRMS repository
@@ -239,7 +239,7 @@ Wait for deployment (2-3 minutes). Note your frontend URL:
 
 text
 https://hrms-self-chi.vercel.app
-Step 5: Update CORS (Final Step)
+## 🔄 **Step 5: Update CORS**
 Go back to Render Dashboard → hrms-api service
 
 Click "Environment" tab
